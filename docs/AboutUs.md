@@ -21,7 +21,7 @@ You can reach us at the following emails `simkianseng28@gmail.com`, `bensonang36
 
 ### Benson Ang Wei Kiat
 
-<img src="images/team/Benson15912.png" width="200px">
+<img src="images/team/benson15912.png" width="200px">
 
 [[github](http://github.com/Benson15912)]
 [[portfolio](team/benson15912)]
