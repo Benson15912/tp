@@ -40,8 +40,8 @@ public class AddAssignmentParser implements Parser<AddAssignmentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAssignmentCommand.MESSAGE_USAGE), pe);
         }
-
-        Availability availability = new Availability(argMultimap.getValue(PREFIX_AVAIL).get());
+        assert(argMultimap == null);
+        Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAIL).get());
         AssignmentDetails details = new AssignmentDetails(argMultimap.getValue(PREFIX_DETAILS).get());
         return new AddAssignmentCommand(index, details, availability);
     }
