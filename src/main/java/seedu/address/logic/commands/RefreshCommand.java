@@ -72,8 +72,11 @@ public class RefreshCommand extends Command {
             model.getFilteredPersonList().stream()
                 .filter(person -> person.isSamePerson(editedPerson))
                 .findFirst()
-                .ifPresent(personToEdit -> model.setPerson(personToEdit, editedPerson))
-        );
+                .ifPresent(personToEdit -> {
+                    model.updateAssignments(personToEdit, editedPerson);
+                    model.setPerson(personToEdit, editedPerson);
+                }
+                ));
     }
     @Override
     public boolean equals(Object other) {

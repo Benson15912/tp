@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentDetails;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
@@ -54,6 +56,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+
+    /**
+     * Updates assignments with the edited Person details.
+     */
+    public void updateAssignments(Person before, Person after) {
+        List<Assignment> assignmentsToChange = new ArrayList<>();
+        for (Assignment a : assignments) {
+            if (a.getPerson().equals(before)) {
+                assignmentsToChange.add(a);
+            }
+        }
+        for (Assignment a : assignmentsToChange) {
+            Assignment editedAssignment = new Assignment(after, new AssignmentDetails(a.getDetails()),
+                    a.getAvailability());
+            if (after.getAvailabilities().contains(a.getAvailability())) {
+                this.assignments.setAssignment(a, editedAssignment);
+            } else {
+                this.assignments.remove(a);
+            }
+        }
+    }
+
+    /**
+     * Removes assignments with the assigned person equivalent to {@code toDelete}
+     */
+    public void updateAssignments(Person toDelete) {
+        List<Assignment> assignmentsToDelete = new ArrayList<>();
+        for (Assignment a : assignments) {
+            if (a.getPerson().equals(toDelete)) {
+                assignmentsToDelete.add(a);
+            }
+        }
+        for (Assignment a : assignmentsToDelete) {
+            this.assignments.remove(a);
+        }
+    }
+
     /**
      * Replaces the contents of the assignment list with {@code assignments}.
      */
@@ -79,6 +118,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasExactPerson(Person person) {
+        requireNonNull(person);
+        return persons.containsExactPerson(person);
     }
 
     /**

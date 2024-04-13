@@ -76,7 +76,7 @@ public class JsonSerializableAddressBook {
             }
             Assignment assignment = jsonAdaptedAssignment.toModelType();
             // check person and duplicate
-            if (!addressBook.hasPerson(assignment.getPerson())) {
+            if (!addressBook.hasExactPerson(assignment.getPerson())) {
                 throw new IllegalValueException(MESSAGE_NO_SUCH_PERSON);
             }
             if (addressBook.hasAssignment(assignment)) {

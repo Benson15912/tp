@@ -195,6 +195,16 @@ public class AddCommandTest {
         public ObservableList<Assignment> getFilteredAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateAssignments(Person toDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateAssignments(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
