@@ -59,6 +59,9 @@ public class JsonAdaptedAssignment {
         }
         final Person modelPerson = person.toModelType();
         final Availability modelAvailability = availability.toModelType();
+        if (!modelPerson.isAvailable(modelAvailability)) {
+            throw new IllegalValueException("Volunteer not available!");
+        }
         final AssignmentDetails modelDetails = new AssignmentDetails(details);
 
 
